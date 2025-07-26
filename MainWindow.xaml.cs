@@ -1,17 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using WinRT.Interop;
+using Microsoft.UI.Windowing;
+using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,6 +17,35 @@ public sealed partial class MainWindow : Window
 {
     public MainWindow()
     {
-        InitializeComponent();
+        this.InitializeComponent();
+
+        // Hacer que el contenido se extienda al title bar (para Mica)
+        this.ExtendsContentIntoTitleBar = true;
+        this.SetTitleBar(NavView);
+
+        // Establecer tamaño inicial con AppWindow API
+        IntPtr hWnd = WindowNative.GetWindowHandle(this);
+        WindowId winId = Win32Interop.GetWindowIdFromWindow(hWnd);
+        AppWindow appWindow = AppWindow.GetFromWindowId(winId);
+        appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 1000, Height = 700 });
+    }
+
+    private void NavView_Loaded(object sender, RoutedEventArgs e)
+    {
+        // Navegar inicialmente a InicioPage
+        //ContentFrame.Navigate(typeof(Views.InicioPage));
+        NavView.SelectedItem = NavView.MenuItems[0];
+    }
+
+    private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+    {
+        if (args.SelectedItemContainer is NavigationViewItem item && item.Tag is string tag)
+        {
+            var pageType = Type.GetType(tag);
+            if (pageType != null && ContentFrame.CurrentSourcePageType != pageType)
+            {
+                ContentFrame.Navigate(pageType);
+            }
+        }
     }
 }
