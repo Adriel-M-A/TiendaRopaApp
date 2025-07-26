@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "TiendaRopaApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "TiendaRopaApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
