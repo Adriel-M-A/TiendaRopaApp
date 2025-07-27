@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using WinRT.Interop;
 using Microsoft.UI.Windowing;
-using WinRT.Interop;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,7 +23,7 @@ public sealed partial class MainWindow : Window
         this.SetTitleBar(NavView);
 
         // Establecer tamaño inicial con AppWindow API
-        IntPtr hWnd = WindowNative.GetWindowHandle(this);
+        var hWnd = WindowNative.GetWindowHandle(this);
         WindowId winId = Win32Interop.GetWindowIdFromWindow(hWnd);
         AppWindow appWindow = AppWindow.GetFromWindowId(winId);
         appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 1000, Height = 700 });
