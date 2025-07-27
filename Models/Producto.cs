@@ -11,19 +11,19 @@ public class Producto
     {
         get; set;
     }
-    public string Nombre
+    public required string Nombre
     {
         get; set;
     }
-    public string Categoria
+    public required string Categoria
     {
         get; set;
     }
-    public string Color
+    public required string Color
     {
         get; set;
     }
-    public string Talle
+    public required string Talle
     {
         get; set;
     }
