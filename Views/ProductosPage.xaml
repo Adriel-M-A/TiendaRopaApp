@@ -59,7 +59,7 @@
                         <TextBlock Text="Stock"       Grid.Column="4" FontWeight="Bold"/>
                     </Grid>
                 </ListView.Header>
-
+                
                 <!-- Plantilla de ítem -->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="models:Producto">

@@ -26,7 +26,7 @@ public sealed partial class MainWindow : Window
         var hWnd = WindowNative.GetWindowHandle(this);
         WindowId winId = Win32Interop.GetWindowIdFromWindow(hWnd);
         AppWindow appWindow = AppWindow.GetFromWindowId(winId);
-        appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 1000, Height = 700 });
+        appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 1200, Height = 700 });
     }
 
     private void NavView_Loaded(object sender, RoutedEventArgs e)

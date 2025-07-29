@@ -13,7 +13,7 @@ public class ProductosViewModel : INotifyPropertyChanged
     // Colección que se mostrará en la UI, filtrada
     public ObservableCollection<Producto> ProductosFiltrados { get; } = new();
 
-    string textoFiltro;
+    string textoFiltro = string.Empty; // Inicialización para evitar el error CS8618
     /// <summary>
     /// Texto que escribe el usuario para filtrar productos.
     /// </summary>
@@ -40,6 +40,8 @@ public class ProductosViewModel : INotifyPropertyChanged
         AplicarFiltro();
     }
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     /// <summary>
     /// Actualiza ProductosFiltrados según TextoFiltro.
     /// </summary>
@@ -62,7 +64,6 @@ public class ProductosViewModel : INotifyPropertyChanged
             ProductosFiltrados.Add(p);
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
     protected void OnPropertyChanged(string nombrePropiedad) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nombrePropiedad));
 }
